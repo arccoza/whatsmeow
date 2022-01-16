@@ -46,9 +46,9 @@ type SenderKeyStore interface {
 }
 
 type AppStateSyncKey struct {
-	Data        []byte
-	Fingerprint []byte
-	Timestamp   int64
+	Data        []byte `json:"data"`
+	Fingerprint []byte `json:"fingerprint"`
+	Timestamp   int64  `json:"timestamp"`
 }
 
 type AppStateSyncKeyStore interface {
@@ -57,8 +57,8 @@ type AppStateSyncKeyStore interface {
 }
 
 type AppStateMutationMAC struct {
-	IndexMAC []byte
-	ValueMAC []byte
+	IndexMAC []byte `json:"indexMac"`
+	ValueMAC []byte `json:"valueMac"`
 }
 
 type AppStateStore interface {
@@ -92,21 +92,21 @@ type DeviceContainer interface {
 }
 
 type Device struct {
-	Log waLog.Logger
+	Log waLog.Logger `json:"-"`
 
-	NoiseKey       *keys.KeyPair
-	IdentityKey    *keys.KeyPair
-	SignedPreKey   *keys.PreKey
-	RegistrationID uint32
-	AdvSecretKey   []byte
+	NoiseKey       *keys.KeyPair `json:"noiseKey"`
+	IdentityKey    *keys.KeyPair `json:"identityKey"`
+	SignedPreKey   *keys.PreKey  `json:"signedPreKey"`
+	RegistrationID uint32        `json:"registrationId"`
+	AdvSecretKey   []byte        `json:"advSecretKey"`
 
-	ID           *types.JID
-	Account      *waProto.ADVSignedDeviceIdentity
-	Platform     string
-	BusinessName string
-	PushName     string
+	ID           *types.JID                       `json:"id"`
+	Account      *waProto.ADVSignedDeviceIdentity `json:"account"`
+	Platform     string                           `json:"platform"`
+	BusinessName string                           `json:"businessName"`
+	PushName     string                           `json:"pushName"`
 
-	Initialized  bool
+	Initialized  bool `json:"-"`
 	Identities   IdentityStore
 	Sessions     SessionStore
 	PreKeys      PreKeyStore

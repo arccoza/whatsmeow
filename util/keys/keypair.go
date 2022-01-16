@@ -16,8 +16,8 @@ import (
 )
 
 type KeyPair struct {
-	Pub  *[32]byte
-	Priv *[32]byte
+	Pub  *[32]byte `json:"pub"`
+	Priv *[32]byte `json:"priv"`
 }
 
 var _ ecc.ECPublicKeyable
@@ -63,8 +63,8 @@ func (kp *KeyPair) Sign(keyToSign *KeyPair) *[64]byte {
 
 type PreKey struct {
 	KeyPair
-	KeyID     uint32
-	Signature *[64]byte
+	KeyID     uint32    `json:"keyId"`
+	Signature *[64]byte `json:"signature"`
 }
 
 func NewPreKey(keyID uint32) *PreKey {
